@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
+   :root {
       --bg-color: #111111;
       --card-bg: #1e1e1f;
       --border-color: #383838;
@@ -142,7 +142,7 @@
     .project-img {
       width: 100%;
       height: 180px;
-      background-color: #252526; /* Slightly lighter box to contrast with the card */
+      background-color: #252526; 
       display: flex;
       align-items: center;
       justify-content: center;
@@ -150,21 +150,13 @@
       position: relative;
     }
 
-    /* Updated to make the icons bright and visible! */
+    /* This is the ONE AND ONLY rule for the SVG now! */
     .project-img svg {
       width: 70px;
       height: 70px;
-      fill: var(--accent); /* Swaps the dark grey for the bright gold accent */
-      opacity: 0.9; /* Removes the heavy transparency */
+      fill: var(--accent); 
+      opacity: 0.9; 
     }
-
-    /* Using an abstract icon as a placeholder for project imagery */
-.project-img svg {
-  width: 50px;
-  height: 50px;
-  fill: var(--text-light);
-  opacity: 0.3;
-}
 
     .project-content {
       padding: 25px;
