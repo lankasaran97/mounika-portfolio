@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Anika Sharma — Forensic Toxicologist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   DESIGN SYSTEM
+═══════════════════════════════════════ */
+:root {
+  /* Palette */
+  --black:      #08090D;
+  --dark:       #0E1018;
+  --dark-2:     #141620;
+  --dark-3:     #1A1E2E;
+  --navy:       #1C2340;
+  --gold:       #C9A84C;
+  --gold-light: #E2C06A;
+  --gold-dim:   rgba(201,168,76,0.12);
+  --gold-glow:  rgba(201,168,76,0.3);
+  --teal:       #2ABFBF;
+  --teal-dim:   rgba(42,191,191,0.08);
+  --pearl:      #F0EEE9;
+  --silver:     #9BA3B2;
+  --silver-dim: rgba(155,163,178,0.45);
+  --border:     rgba(201,168,76,0.14);
+  --border-sub: rgba(155,163,178,0.07);
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --font-mono:  'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--pearl);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Grain texture */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 900; opacity: 0.45;
+}
+
+/* ── SCROLL REVEAL ── */
+.sr {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1);
+}
+.sr.in { opacity: 1; transform: none; }
+.sr-d1 { transition-delay: .08s; }
+.sr-d2 { transition-delay: .16s; }
+.sr-d3 { transition-delay: .24s; }
+.sr-d4 { transition-delay: .32s; }
+.sr-d5 { transition-delay: .4s; }
+
+/* ── SHARED ── */
+.container { max-width: 1140px; margin: 0 auto; padding: 0 48px; }
+section { position: relative; z-index: 1; }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 18px;
+}
+.eyebrow::before { content:''; display:block; width:22px; height:1px; background:var(--gold); }
+
+h2.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 3.8vw, 54px);
+  font-weight: 400; line-height: 1.12;
+  color: var(--pearl);
+}
+h2.section-title em { font-style: italic; color: var(--gold); }
+
+.gold-rule { width: 48px; height: 1px; background: var(--gold); margin: 22px 0; opacity: 0.6; }
+
+p.lead {
+  font-size: 15px; color: var(--silver);
+  line-height: 1.85; max-width: 520px;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 13px 30px; cursor: pointer;
+  border: none; text-decoration: none;
+  transition: all 0.35s cubic-bezier(.16,1,.3,1);
+  position: relative; overflow: hidden;
+}
+.btn-primary {
+  background: var(--gold); color: var(--black);
+}
+.btn-primary::before {
+  content:''; position:absolute; inset:0;
+  background: var(--gold-light);
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+}
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary:hover { box-shadow: 0 0 32px var(--gold-glow); transform: translateY(-2px); }
+.btn-primary span { position: relative; z-index: 1; }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold);
+}
+.btn-outline:hover {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+}
+
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+  height: 66px; display: flex; align-items: center;
+  padding: 0 48px; justify-content: space-between;
+  transition: background 0.4s, border-color 0.4s;
+}
+#nav.scrolled {
+  background: rgba(8,9,13,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-sub);
+}
+
+.nav-brand {
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 3px;
+  color: var(--pearl); text-decoration: none; text-transform: uppercase;
+}
+.nav-brand .dot { color: var(--gold); }
+
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 11px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--silver); text-decoration: none;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--pearl); }
+
+.nav-cta {
+  font-family: var(--font-sans); font-size: 10.5px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 9px 22px; border: 1px solid var(--gold); color: var(--gold);
+  background: transparent; cursor: pointer;
+  transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--gold); color: var(--black); }
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 60px;
+  padding: 100px 48px 60px;
+  max-width: 1140px; margin: 0 auto;
+}
+
+/* Ambient bg radial */
+#hero::before {
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 65% 45%, rgba(201,168,76,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 20% 70%, rgba(42,191,191,0.03) 0%, transparent 60%);
+}
+
+.hero-left { position: relative; z-index: 1; }
+
+.hero-greeting {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--teal);
+  margin-bottom: 26px;
+  animation: fadeUp 0.9s 0.1s both;
+}
+.hero-greeting::before { content:''; width:20px; height:1px; background:var(--teal); display:block; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:none; }
+}
+
+.hero-emoji {
+  font-size: 52px; display: block;
+  margin-bottom: 16px;
+  animation: fadeUp 0.9s 0.2s both;
+  filter: drop-shadow(0 0 20px rgba(201,168,76,0.3));
+}
+
+.hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(44px, 5vw, 72px);
+  font-weight: 400; line-height: 1.05;
+  color: var(--pearl);
+  animation: fadeUp 0.9s 0.28s both;
+}
+.hero-name span { color: var(--gold); font-style: italic; }
+
+.hero-title {
+  font-family: var(--font-mono); font-size: 13px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--silver); margin-top: 10px; margin-bottom: 24px;
+  animation: fadeUp 0.9s 0.36s both;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 400; font-style: italic;
+  line-height: 1.45; color: var(--pearl);
+  max-width: 480px; margin-bottom: 20px;
+  animation: fadeUp 0.9s 0.44s both;
+}
+.hero-headline strong { font-style: normal; color: var(--gold); font-weight: 500; }
+
+.hero-sub {
+  font-size: 14.5px; color: var(--silver);
+  line-height: 1.8; max-width: 430px; margin-bottom: 36px;
+  animation: fadeUp 0.9s 0.52s both;
+}
+
+/* Specialties bar */
+.hero-specialties {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.9s 0.58s both;
+}
+.spec-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--dark-3); border: 1px solid var(--border-sub);
+  padding: 7px 14px; font-size: 11.5px; font-weight: 400;
+  color: var(--silver); letter-spacing: 0.3px;
+  transition: border-color 0.25s, color 0.25s;
+}
+.spec-tag:hover { border-color: var(--gold); color: var(--pearl); }
+
+.hero-btns {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  animation: fadeUp 0.9s 0.65s both;
+}
+
+/* ── HERO RIGHT: animated DNA / molecular visual ── */
+.hero-right {
+  position: relative; z-index: 1;
+  display: flex; justify-content: center; align-items: center;
+}
+
+.hero-visual-wrap {
+  position: relative; width: 420px; height: 520px;
+}
+
+.hero-visual-wrap svg { width: 100%; height: 100%; }
+
+/* Orbiting particle */
+.orbit-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  animation: orbitSpin 20s linear infinite;
+}
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.stat-float {
+  position: absolute;
+  background: var(--dark-2); border: 1px solid var(--border);
+  padding: 16px 20px; min-width: 140px;
+  animation: fadeUp 1s both;
+}
+.stat-float:nth-child(1) { right: -10px; top: 80px; animation-delay: 0.8s; }
+.stat-float:nth-child(2) { left: -20px; bottom: 120px; animation-delay: 1s; }
+.stat-float:nth-child(3) { right: 10px; bottom: 60px; animation-delay: 1.2s; }
+
+.sf-num {
+  font-family: var(--font-serif); font-size: 32px; font-weight: 400;
+  color: var(--pearl); line-height: 1;
+}
+.sf-num span { color: var(--gold); font-size: 18px; }
+.sf-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--silver); margin-top: 4px; }
+
+/* ══════════════════════════════════════
+   ABOUT
+══════════════════════════════════════ */
+#about {
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--black), var(--dark));
+}
+
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 90px; align-items: center;
+}
+
+/* Timeline side */
+.about-timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: flex; gap: 24px;
+  padding-bottom: 32px; position: relative;
+}
+.timeline-item:not(:last-child)::after {
+  content:''; position:absolute;
+  left: 11px; top: 24px; bottom: 0; width: 1px;
+  background: linear-gradient(180deg, var(--border), transparent);
+}
+.tl-dot {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  background: var(--dark-3); border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center; margin-top: 3px;
+}
+.tl-dot-inner { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+.tl-year {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 2px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 5px;
+}
+.tl-title { font-size: 15px; font-weight: 500; color: var(--pearl); margin-bottom: 5px; }
+.tl-sub { font-size: 13px; color: var(--silver); line-height: 1.65; }
+
+/* About content */
+.about-content {}
+.about-quote {
+  font-family: var(--font-serif); font-size: 21px;
+  font-style: italic; font-weight: 400; line-height: 1.55;
+  color: var(--pearl); border-left: 2px solid var(--gold);
+  padding-left: 22px; margin: 24px 0 28px;
+}
+.about-body { font-size: 14.5px; color: var(--silver); line-height: 1.9; }
+
+/* ══════════════════════════════════════
+   EXPERTISE
+══════════════════════════════════════ */
+#expertise {
+  padding: 120px 0;
+  background: var(--dark);
+}
+
+.expertise-header { text-align: center; margin-bottom: 70px; }
+.expertise-header .gold-rule { margin: 20px auto; }
+
+.expertise-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.exp-card {
+  background: var(--dark); padding: 40px 32px;
+  position: relative; overflow: hidden;
+  transition: background 0.4s;
+  cursor: default;
+}
+.exp-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0); transition: transform 0.5s;
+}
+.exp-card:hover { background: var(--dark-2); }
+.exp-card:hover::after { transform: scaleX(1); }
+
+.exp-emoji { font-size: 32px; display: block; margin-bottom: 20px; }
+.exp-title {
+  font-family: var(--font-serif); font-size: 20px; font-weight: 400;
+  color: var(--pearl); margin-bottom: 12px;
+}
+.exp-desc { font-size: 13.5px; color: var(--silver); line-height: 1.8; }
+
+/* ══════════════════════════════════════
+   CASE STUDIES
+══════════════════════════════════════ */
+#cases {
+  padding: 130px 0;
+  background: linear-gradient(180deg, var(--dark), var(--black));
+}
+
+.cases-header { margin-bottom: 72px; }
+
+.case-tabs {
+  display: flex; gap: 0; border-bottom: 1px solid var(--border-sub);
+  margin-bottom: 56px; flex-wrap: wrap;
+}
+.case-tab {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--silver);
+  padding: 12px 24px; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: all 0.25s; background: none; border-top: none;
+  border-left: none; border-right: none;
+}
+.case-tab:hover { color: var(--pearl); }
+.case-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+.case-panels { position: relative; }
+.case-panel { display: none; }
+.case-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+.case-meta {}
+.case-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold-dim); border: 1px solid var(--border);
+  padding: 5px 14px; font-family: var(--font-mono);
+  font-size: 9.5px; letter-spacing: 2.5px; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 22px;
+}
+.case-title {
+  font-family: var(--font-serif); font-size: clamp(26px, 3vw, 38px);
+  font-weight: 400; line-height: 1.15; color: var(--pearl); margin-bottom: 18px;
+}
+.case-title em { color: var(--gold); font-style: italic; }
+.case-summary { font-size: 14px; color: var(--silver); line-height: 1.85; margin-bottom: 28px; }
+
+.case-blocks { display: flex; flex-direction: column; gap: 24px; }
+.case-block {
+  border-left: 2px solid var(--border); padding-left: 20px;
+  transition: border-color 0.3s;
+}
+.case-block:hover { border-left-color: var(--gold); }
+.cb-label {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 7px;
+}
+.cb-text { font-size: 14px; color: var(--silver); line-height: 1.8; }
+.cb-text.outcome { color: rgba(201,168,76,0.85); }
+
+.case-finding {
+  background: var(--dark-2); border: 1px solid var(--border-sub);
+  padding: 28px 26px; margin-top: 8px;
+}
+.cf-header {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
+}
+.cf-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 12px; font-size: 13.5px; color: var(--silver); line-height: 1.7;
+}
+.cf-item::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 12px; margin-top: 3px; }
+
+/* ══════════════════════════════════════
+   SKILLS
+══════════════════════════════════════ */
+#skills {
+  padding: 120px 0;
+  background: var(--dark);
+}
+
+.skills-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px; margin-top: 60px;
+}
+
+.skill-group {}
+.sg-title {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sg-title::after { content:''; flex:1; height:1px; background: var(--border); }
+
+.skill-list { display: flex; flex-direction: column; gap: 14px; }
+.skill-item { display: flex; flex-direction: column; gap: 6px; }
+.skill-name { font-size: 13.5px; color: var(--pearl); font-weight: 400; }
+.skill-bar {
+  height: 2px; background: var(--border-sub); position: relative;
+  overflow: hidden;
+}
+.skill-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--teal));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 1.2s cubic-bezier(.16,1,.3,1);
+}
+.skill-item.in .skill-fill { transform: scaleX(1); }
+
+/* Tools */
+.tools-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 14px; margin-top: 56px;
+}
+.tool-chip {
+  background: var(--dark-2); border: 1px solid var(--border-sub);
+  padding: 14px 16px; text-align: center;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px;
+  color: var(--silver); transition: all 0.3s;
+}
+.tool-chip:hover { border-color: var(--gold); color: var(--pearl); background: var(--gold-dim); }
+
+/* ══════════════════════════════════════
+   EDUCATION
+══════════════════════════════════════ */
+#education {
+  padding: 120px 0;
+  background: var(--black);
+}
+
+.edu-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; margin-top: 56px;
+}
+
+.edu-card {
+  border: 1px solid var(--border-sub); padding: 36px 32px;
+  position: relative; transition: border-color 0.35s, transform 0.35s;
+}
+.edu-card:hover { border-color: var(--border); transform: translateY(-3px); }
+.edu-card::before {
+  content:''; position:absolute; top:0; left:0;
+  width:3px; height:0; background: var(--gold);
+  transition: height 0.4s;
+}
+.edu-card:hover::before { height: 100%; }
+
+.edu-badge {
+  display: inline-block; background: var(--gold-dim);
+  border: 1px solid var(--border); padding: 4px 12px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 18px;
+}
+.edu-degree {
+  font-family: var(--font-serif); font-size: 22px; font-weight: 400;
+  color: var(--pearl); margin-bottom: 6px; line-height: 1.3;
+}
+.edu-inst { font-size: 13px; color: var(--silver); margin-bottom: 14px; }
+.edu-detail { font-size: 13px; color: var(--silver); line-height: 1.75; }
+
+/* Certifications */
+.cert-list {
+  display: flex; flex-direction: column; gap: 16px; margin-top: 56px;
+}
+.cert-item {
+  display: grid; grid-template-columns: auto 1fr auto;
+  gap: 20px; align-items: center;
+  padding: 20px 24px; border: 1px solid var(--border-sub);
+  transition: border-color 0.3s;
+}
+.cert-item:hover { border-color: var(--border); }
+.cert-icon { font-size: 24px; }
+.cert-name { font-size: 14px; font-weight: 500; color: var(--pearl); }
+.cert-body { font-size: 12px; color: var(--silver); }
+.cert-year {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px;
+  color: var(--gold);
+}
+
+/* ══════════════════════════════════════
+   THOUGHT LEADERSHIP
+══════════════════════════════════════ */
+#articles {
+  padding: 120px 0;
+  background: var(--dark);
+}
+
+.articles-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 56px;
+}
+
+.article-card {
+  border: 1px solid var(--border-sub); padding: 36px 28px;
+  position: relative; overflow: hidden;
+  transition: all 0.4s; cursor: default;
+}
+.article-card::before {
+  content:''; position:absolute; bottom:0; left:0; right:0;
+  height:2px; background: linear-gradient(90deg, var(--gold), var(--teal));
+  transform: scaleX(0); transition: transform 0.4s;
+}
+.article-card:hover { border-color: var(--border); transform: translateY(-4px); }
+.article-card:hover::before { transform: scaleX(1); }
+
+.art-tag {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.art-tag::before { content:''; width:14px; height:1px; background: var(--teal); }
+.art-title {
+  font-family: var(--font-serif); font-size: 20px; font-weight: 400;
+  color: var(--pearl); line-height: 1.35; margin-bottom: 14px;
+}
+.art-excerpt { font-size: 13px; color: var(--silver); line-height: 1.75; margin-bottom: 22px; }
+.art-read {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 8px; text-decoration: none;
+  transition: gap 0.25s;
+}
+.art-read:hover { gap: 14px; }
+
+/* ══════════════════════════════════════
+   CONTACT
+══════════════════════════════════════ */
+#contact {
+  padding: 140px 0;
+  background: linear-gradient(180deg, var(--dark), var(--dark-2));
+}
+
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 90px; align-items: start;
+}
+
+.contact-left {}
+.contact-desc { font-size: 14px; color: var(--silver); line-height: 1.9; margin: 20px 0 32px; max-width: 360px; }
+.contact-meta { display: flex; flex-direction: column; gap: 16px; }
+.cm-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px; color: var(--silver);
+}
+.cm-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+/* Form */
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.field-group { display: flex; flex-direction: column; gap: 7px; }
+.field-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--gold); font-weight: 500;
+}
+.field-input, .field-select, .field-textarea {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-sub);
+  padding: 13px 16px; font-family: var(--font-sans);
+  font-size: 14px; font-weight: 300; color: var(--pearl);
+  outline: none; width: 100%;
+  transition: border-color 0.3s, background 0.3s;
+  appearance: none; border-radius: 0;
+}
+.field-input:focus, .field-select:focus, .field-textarea:focus {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.03);
+}
+.field-input::placeholder, .field-textarea::placeholder { color: rgba(155,163,178,0.3); }
+.field-select option { background: var(--dark-2); }
+.field-textarea { height: 110px; resize: none; }
+.field-note { font-size: 11px; color: rgba(155,163,178,0.4); line-height: 1.7; margin-top: -4px; }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  padding: 36px 48px;
+  border-top: 1px solid var(--border-sub);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--black); position: relative; z-index: 1;
+}
+.foot-brand {
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--silver); text-decoration: none;
+}
+.foot-brand span { color: var(--gold); }
+.foot-copy { font-size: 11.5px; color: rgba(155,163,178,0.35); }
+.foot-links { display: flex; gap: 24px; }
+.foot-links a { font-size: 11px; color: rgba(155,163,178,0.4); text-decoration: none; letter-spacing: 1px; transition: color 0.25s; }
+.foot-links a:hover { color: var(--gold); }
+
+/* Divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15) 40%, transparent);
+}
+
+/* ══════════════════════════════════════
+   BRAND / DESIGN REFERENCE BOX
+══════════════════════════════════════ */
+#brand-guide {
+  padding: 100px 0;
+  background: var(--dark-3);
+  border-top: 1px solid var(--border);
+}
+.brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.bg-section {}
+.bg-title {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.bg-item { margin-bottom: 14px; }
+.bg-label { font-size: 11px; color: var(--silver); margin-bottom: 4px; }
+.bg-value { font-size: 14px; color: var(--pearl); font-weight: 500; }
+.swatch { width: 100%; height: 36px; border-radius: 2px; margin-bottom: 6px; }
+.color-row { display: flex; gap: 8px; margin-bottom: 16px; }
+.color-chip { flex: 1; }
+.chip-color { height: 40px; }
+.chip-label { font-size: 9.5px; color: var(--silver); text-align: center; margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<!-- ════════════ NAV ════════════ -->
+<nav id="nav">
+  <a href="#hero" class="nav-brand">A<span class="dot">.</span>Sharma</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#cases">Cases</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#articles">Insights</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request Consultation</button>
+</nav>
+
+<!-- ════════════ HERO ════════════ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-greeting">Forensic Toxicology · Chemical Evidence Analysis</div>
+    <span class="hero-emoji">👩‍🔬</span>
+    <h1 class="hero-name">Dr. Anika<br><span>Sharma</span></h1>
+    <div class="hero-title">Forensic Toxicologist</div>
+
+    <p class="hero-headline">
+      "Decoding <strong>Toxic Evidence</strong><br>with Scientific Precision."
+    </p>
+
+    <p class="hero-sub">
+      Specializing in the chemical interpretation of toxicological evidence for medicolegal investigations — bridging the gap between complex analytical data and courtroom-ready conclusions.
+    </p>
+
+    <div class="hero-specialties">
+      <div class="spec-tag">🧪 Drug &amp; Poison Analysis</div>
+      <div class="spec-tag">⚖️ Case Interpretation</div>
+      <div class="spec-tag">🔬 Scientific Investigation</div>
+      <div class="spec-tag">📋 Forensic Report Analysis</div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#cases" class="btn btn-primary"><span>View Case Work</span></a>
+      <a href="#contact" class="btn btn-outline">Request Consultation</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual-wrap">
+      <!-- Molecular / DNA visual -->
+      <svg viewBox="0 0 420 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="orb" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#1A1E2E"/>
+            <stop offset="100%" stop-color="#08090D"/>
+          </radialGradient>
+          <radialGradient id="glow-center" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="blur-sm"><feGaussianBlur stdDeviation="2"/></filter>
+          <filter id="glow-f">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- BG circle -->
+        <circle cx="210" cy="260" r="185" fill="url(#orb)"/>
+        <circle cx="210" cy="260" r="185" fill="url(#glow-center)"/>
+
+        <!-- Outer rings -->
+        <circle cx="210" cy="260" r="182" stroke="#C9A84C" stroke-width="0.4" opacity="0.15"/>
+        <circle cx="210" cy="260" r="155" stroke="#C9A84C" stroke-width="0.3" opacity="0.1"/>
+        <circle cx="210" cy="260" r="120" stroke="#C9A84C" stroke-width="0.5" opacity="0.12"/>
+
+        <!-- Hexagonal molecular frame -->
+        <polygon points="210,80 303,132 303,236 210,288 117,236 117,132"
+          fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.25"/>
+        <polygon points="210,100 287,144 287,232 210,276 133,232 133,144"
+          fill="none" stroke="#C9A84C" stroke-width="0.4" opacity="0.15"/>
+
+        <!-- DNA helix strands -->
+        <!-- Strand A -->
+        <path d="M 165 88 Q 230 118 165 148 Q 100 178 165 208 Q 230 238 165 268 Q 100 298 165 328 Q 230 358 165 388 Q 100 418 165 448"
+          stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.5" filter="url(#glow-f)"/>
+        <!-- Strand B -->
+        <path d="M 255 88 Q 190 118 255 148 Q 320 178 255 208 Q 190 238 255 268 Q 320 298 255 328 Q 190 358 255 388 Q 320 418 255 448"
+          stroke="#2ABFBF" stroke-width="1.5" fill="none" opacity="0.5" filter="url(#glow-f)"/>
+
+        <!-- Cross rungs -->
+        <line x1="165" y1="118" x2="255" y2="118" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="148" x2="255" y2="148" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="178" x2="255" y2="178" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="208" x2="255" y2="208" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="238" x2="255" y2="238" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="268" x2="255" y2="268" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="298" x2="255" y2="298" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="328" x2="255" y2="328" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="358" x2="255" y2="358" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="388" x2="255" y2="388" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+        <line x1="165" y1="418" x2="255" y2="418" stroke="#F0EEE9" stroke-width="0.8" opacity="0.2"/>
+
+        <!-- Node dots on strands -->
+        <circle cx="165" cy="118" r="4" fill="#C9A84C" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="255" cy="148" r="4" fill="#2ABFBF" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="165" cy="178" r="4" fill="#C9A84C" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="255" cy="208" r="4" fill="#2ABFBF" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="165" cy="238" r="4" fill="#C9A84C" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="255" cy="268" r="4" fill="#2ABFBF" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="165" cy="298" r="4" fill="#C9A84C" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="255" cy="328" r="4" fill="#2ABFBF" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="165" cy="358" r="4" fill="#C9A84C" opacity="0.8" filter="url(#glow-f)"/>
+        <circle cx="255" cy="388" r="4" fill="#2ABFBF" opacity="0.8" filter="url(#glow-f)"/>
+
+        <!-- Benzene ring in center -->
+        <polygon points="210,225 228,235 228,255 210,265 192,255 192,235"
+          fill="none" stroke="#C9A84C" stroke-width="1.2" opacity="0.5" filter="url(#glow-f)"/>
+        <circle cx="210" cy="245" r="10" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.35"/>
+        <circle cx="210" cy="245" r="4" fill="#C9A84C" opacity="0.25"/>
+
+        <!-- Small orbiting molecules -->
+        <circle cx="100" cy="160" r="8" fill="none" stroke="#C9A84C" stroke-width="0.8" opacity="0.3"/>
+        <circle cx="100" cy="160" r="3" fill="#C9A84C" opacity="0.4"/>
+        <circle cx="320" cy="340" r="10" fill="none" stroke="#2ABFBF" stroke-width="0.8" opacity="0.3"/>
+        <circle cx="320" cy="340" r="4" fill="#2ABFBF" opacity="0.4"/>
+        <circle cx="80" cy="320" r="6" fill="none" stroke="#2ABFBF" stroke-width="0.8" opacity="0.25"/>
+
+        <!-- Scan line -->
+        <line x1="50" y1="490" x2="370" y2="490" stroke="#C9A84C" stroke-width="0.5" opacity="0.15"/>
+        <line x1="50" y1="500" x2="300" y2="500" stroke="#C9A84C" stroke-width="0.3" opacity="0.1"/>
+        <line x1="50" y1="508" x2="330" y2="508" stroke="#C9A84C" stroke-width="0.3" opacity="0.08"/>
+      </svg>
+
+      <!-- Floating stats -->
+      <div class="stat-float">
+        <div class="sf-num">50<span>+</span></div>
+        <div class="sf-label">Cases Analysed</div>
+      </div>
+      <div class="stat-float">
+        <div class="sf-num">3<span>+</span></div>
+        <div class="sf-label">Years Specialization</div>
+      </div>
+      <div class="stat-float">
+        <div class="sf-num">GC<span>-MS</span></div>
+        <div class="sf-label">Primary Instrument</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ ABOUT ════════════ -->
+<div class="section-divider"></div>
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="sr">
+        <div class="eyebrow">Timeline</div>
+        <div class="about-timeline">
+          <div class="timeline-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div>
+              <div class="tl-year">2024 — Present</div>
+              <div class="tl-title">Independent Forensic Consultant</div>
+              <div class="tl-sub">Providing toxicological analysis support to legal teams and investigative agencies. Specialising in postmortem drug interpretation and poison detection.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div>
+              <div class="tl-year">2022 — 2024</div>
+              <div class="tl-title">Forensic Science Research Associate</div>
+              <div class="tl-sub">Conducted GC-MS and LC-MS/MS analysis on biological specimens. Co-authored research on synthetic opioid detection methodologies.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div>
+              <div class="tl-year">2019 — 2022</div>
+              <div class="tl-title">BSc (Hons) Forensic Science</div>
+              <div class="tl-sub">First Class Honours. Dissertation: "Postmortem Redistribution of Synthetic Cannabinoids in Central Blood." Department Prize recipient.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sr sr-d2">
+        <div class="eyebrow">About</div>
+        <h2 class="section-title">The Science of<br><em>Certainty.</em></h2>
+        <div class="gold-rule"></div>
+        <blockquote class="about-quote">
+          "Toxicology doesn't deal in maybes — it deals in molecules."
+        </blockquote>
+        <p class="about-body">
+          I am a forensic toxicologist with a focused practice in the chemical interpretation of toxic evidence. My work sits at the intersection of analytical chemistry, pathology, and legal strategy — translating complex biological data into precise, defensible scientific conclusions.
+          <br><br>
+          My approach is methodical and deeply rooted in instrumentation. I don't simply report results — I interrogate the data. Whether identifying trace organophosphate residues in postmortem tissue, evaluating chain-of-custody integrity in laboratory litigation packages, or providing scientific narrative for defense and prosecution teams, precision is non-negotiable.
+          <br><br>
+          I operate with absolute discretion. My clients include legal professionals, medical examiners, and corporate compliance teams who require toxicological clarity in high-consequence situations.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ EXPERTISE ════════════ -->
+<div class="section-divider"></div>
+<section id="expertise">
+  <div class="container">
+    <div class="expertise-header sr">
+      <div class="eyebrow">Core Capabilities</div>
+      <h2 class="section-title">Areas of <em>Specialization</em></h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="expertise-grid">
+      <div class="exp-card sr">
+        <span class="exp-emoji">🧪</span>
+        <div class="exp-title">Toxicology Analysis</div>
+        <p class="exp-desc">Rigorous quantitative and qualitative analysis of drugs, poisons, and their metabolites in biological matrices including blood, urine, vitreous humor, and tissue samples.</p>
+      </div>
+      <div class="exp-card sr sr-d1">
+        <span class="exp-emoji">💊</span>
+        <div class="exp-title">Drug & Poison Detection</div>
+        <p class="exp-desc">Identification of controlled substances, pharmaceutical overdoses, natural toxins, and industrial poisons using validated LC-MS/MS and GC-MS methodologies.</p>
+      </div>
+      <div class="exp-card sr sr-d2">
+        <span class="exp-emoji">🔬</span>
+        <div class="exp-title">Postmortem Toxicology</div>
+        <p class="exp-desc">Interpretation of postmortem redistribution phenomena, drug tolerance assessment, and pharmacokinetic modelling to establish cause and manner of death.</p>
+      </div>
+      <div class="exp-card sr sr-d3">
+        <span class="exp-emoji">⚖️</span>
+        <div class="exp-title">Forensic Report Interpretation</div>
+        <p class="exp-desc">Critical audit of laboratory litigation packages to identify methodological errors, calibration deviations, and chain-of-custody failures that may compromise evidentiary integrity.</p>
+      </div>
+      <div class="exp-card sr sr-d4">
+        <span class="exp-emoji">📊</span>
+        <div class="exp-title">Case-Based Scientific Analysis</div>
+        <p class="exp-desc">Comprehensive scientific analysis tailored to the specific requirements of criminal defence, civil litigation, regulatory proceedings, and workplace investigations.</p>
+      </div>
+      <div class="exp-card sr sr-d5">
+        <span class="exp-emoji">🧬</span>
+        <div class="exp-title">Pharmacokinetic Modelling</div>
+        <p class="exp-desc">Mathematical modelling of drug concentration-time profiles to reconstruct timelines of exposure, establish impairment windows, and rebut opposing expert assertions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CASE STUDIES ════════════ -->
+<div class="section-divider"></div>
+<section id="cases">
+  <div class="container">
+    <div class="cases-header sr">
+      <div class="eyebrow">Work Portfolio</div>
+      <h2 class="section-title">Selected Case <em>Studies</em></h2>
+      <div class="gold-rule"></div>
+      <p class="lead">Anonymised and adapted from real-world analytical work. All sensitive details have been modified to protect client confidentiality.</p>
+    </div>
+
+    <div class="case-tabs">
+      <button class="case-tab active" onclick="showCase(0)">Case 01 · Criminal Defence</button>
+      <button class="case-tab" onclick="showCase(1)">Case 02 · Wrongful Death</button>
+      <button class="case-tab" onclick="showCase(2)">Case 03 · Workplace Screening</button>
+      <button class="case-tab" onclick="showCase(3)">Case 04 · Drug-Facilitated Crime</button>
+    </div>
+
+    <div class="case-panels">
+      <!-- Case 01 -->
+      <div class="case-panel active">
+        <div class="case-meta">
+          <div class="case-badge">🔬 Analytical Chemistry · Calibration Analysis</div>
+          <h3 class="case-title">The Phantom<br><em>Blood Result</em></h3>
+          <p class="case-summary">A defence team requested independent review of toxicological evidence used in a DUI-drugs prosecution. The state laboratory's results formed the sole evidentiary basis for the charge. The client maintained he had consumed only prescribed medication.</p>
+          <div class="case-blocks">
+            <div class="case-block">
+              <div class="cb-label">Problem</div>
+              <p class="cb-text">Blood analysis reported a THC concentration of 4.2 ng/mL, above the legal impairment threshold. Standard review accepted the figure. Defence required rigorous independent scrutiny of the complete laboratory data package.</p>
+            </div>
+            <div class="case-block">
+              <div class="cb-label">Method &amp; Approach</div>
+              <p class="cb-text">Full audit of the LC-MS/MS litigation pack including calibration curves, internal standard responses, QC sample data, and instrument maintenance logs. Back-calculation of expected ion ratios at reported concentration.</p>
+            </div>
+            <div class="case-block">
+              <div class="cb-label">Outcome</div>
+              <p class="cb-text outcome">Internal standard deviation of 6.3% detected — exceeding the laboratory's own SOP threshold of 4%. Evidence deemed unreliable. Charges dismissed at preliminary hearing. ⚖️</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="case-finding">
+            <div class="cf-header">Key Scientific Findings</div>
+            <div class="cf-item">Calibration curve R² value: 0.9887 — below the required 0.990 threshold</div>
+            <div class="cf-item">Internal standard peak area CV at reporting concentration: 6.3% (SOP maximum: 4.0%)</div>
+            <div class="cf-item">Instrument maintenance log gap of 14 days preceding analysis</div>
+            <div class="cf-item">QC sample recovery at 89% — outside acceptable ±15% window</div>
+            <div class="cf-item">Documented conclusion: Result unreliable; cannot be used as a scientifically defensible concentration figure</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 02 -->
+      <div class="case-panel">
+        <div class="case-meta">
+          <div class="case-badge">⚖️ Civil Litigation · Toxin Identification</div>
+          <h3 class="case-title">The Invisible<br><em>Pesticide</em></h3>
+          <p class="case-summary">A civil litigation team representing the family of a deceased agricultural worker engaged toxicological consulting after the medical examiner's standard drug screen returned a negative result. The family suspected occupational chemical exposure.</p>
+          <div class="case-blocks">
+            <div class="case-block">
+              <div class="cb-label">Problem</div>
+              <p class="cb-text">Standard 10-panel postmortem toxicology screen failed to identify any causative substance. Clinical presentation — including cholinergic crisis features — strongly suggested organophosphate poisoning, but this class was not included in routine testing.</p>
+            </div>
+            <div class="case-block">
+              <div class="cb-label">Method &amp; Approach</div>
+              <p class="cb-text">Recommended targeted LC-QTOF screening for 47 common agricultural organophosphate compounds on retained liver tissue. Red blood cell acetylcholinesterase activity assessment as a confirmatory biomarker.</p>
+            </div>
+            <div class="case-block">
+              <div class="cb-label">Outcome</div>
+              <p class="cb-text outcome">Chlorpyrifos identified at 0.18 mg/kg in liver tissue. RBC-AChE activity suppressed to 22% of normal. Expert report formed the scientific foundation for a substantial civil settlement. 🧪</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="case-finding">
+            <div class="cf-header">Key Scientific Findings</div>
+            <div class="cf-item">Chlorpyrifos confirmed by LC-QTOF with accurate mass &lt;5 ppm deviation</div>
+            <div class="cf-item">Tissue concentration consistent with sub-acute/chronic occupational exposure</div>
+            <div class="cf-item">RBC-AChE activity: 22% of reference range — diagnostic of organophosphate toxicity</div>
+            <div class="cf-item">Metabolite TCP identified, confirming in-vivo metabolism prior to death</div>
+            <div class="cf-item">Workplace chemical register confirmed unsupervised chlorpyrifos use in preceding 6 months</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 03 -->
+      <div class="case-panel">
+        <div class="case-meta">
+          <div class="case-badge">🏢 Corporate Advisory · Compliance</div>
+          <h3 class="case-title">The Contested<br><em>Workplace Result</em></h3>
+          <p class="case-summary">An employee facing termination following a positive workplace drug test engaged legal counsel who sought independent scientific review. The employee disputed the result, claiming dietary hemp supplement consumption.</p>
+          <div class="case-blocks">
+            <div class="case-block">
+              <div class="cb-label">Problem</div>
+              <p class="cb-text">Urine immunoassay screen positive for cannabinoids; LC-MS/MS confirmation reported THC-COOH at 38 ng/mL. Employee's account was plausible but required pharmacokinetic verification against documented hemp product use.</p>
+            </div>
+            <div class="case-block">
+              <div class="cb-label">Method &amp; Approach</div>
+              <p class="cb-text">Pharmacokinetic analysis of THC-COOH excretion patterns. Comparative analysis of CBD:THC-COOH ratio. Review of the hemp product's certified analysis of cannabinoid content. Creatinine-normalised concentration assessment.</p>
+            </div>
+            <div class="case-block">
+              <div class="cb-label">Outcome</div>
+              <p class="cb-text outcome">CBD:THC-COOH ratio and daily excretion pattern consistent with hemp supplement metabolism only. THC from cannabis use could not be scientifically substantiated. Termination successfully contested. 🔬</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="case-finding">
+            <div class="cf-header">Key Scientific Findings</div>
+            <div class="cf-item">THC-COOH at 38 ng/mL — above MRO cut-off (15 ng/mL) but pharmacokinetically ambiguous</div>
+            <div class="cf-item">CBD concentration: 220 ng/mL — ratio consistent with hemp product use, not cannabis</div>
+            <div class="cf-item">Daily creatinine-normalized excretion trending downward — consistent with dietary source elimination</div>
+            <div class="cf-item">Hemp product COA confirmed &lt;0.3% Δ9-THC with 18% CBD content</div>
+            <div class="cf-item">Scientific opinion: Result cannot establish cannabis use with reasonable scientific certainty</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 04 -->
+      <div class="case-panel">
+        <div class="case-meta">
+          <div class="case-badge">🚨 Criminal Investigation · DFSA</div>
+          <h3 class="case-title">The Silent<br><em>Benzodiazepine</em></h3>
+          <p class="case-summary">A drug-facilitated sexual assault investigation where the complainant reported amnesia and sedation following a social event. Initial urine screen was negative. Police liaison requested specialist toxicological review.</p>
+          <div class="case-blocks">
+            <div class="case-block">
+              <div class="cb-label">Problem</div>
+              <p class="cb-text">Standard immunoassay panel returned negative results 72 hours post-event. Clinical history — retrograde amnesia, disinhibition, and hypersedation — was strongly consistent with GHB or novel benzodiazepine exposure, but these require specialist targeted analysis.</p>
+            </div>
+            <div class="case-block">
+              <div class="cb-label">Method &amp; Approach</div>
+              <p class="cb-text">Recommended targeted screening of retained urine for novel benzodiazepines and GHB by LC-QTOF. Hair strand toxicology analysis requested to extend the detection window. Segmental analysis performed on 3 cm proximal growth.</p>
+            </div>
+            <div class="case-block">
+              <div class="cb-label">Outcome</div>
+              <p class="cb-text outcome">Clonazolam (a designer benzodiazepine) identified in hair segment corresponding to the event window at 28 pg/mg. Expert report submitted to CPS. Scientific evidence accepted in subsequent criminal proceedings. ⚖️</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="case-finding">
+            <div class="cf-header">Key Scientific Findings</div>
+            <div class="cf-item">Clonazolam confirmed in hair by LC-QTOF accurate mass identification (3.1 ppm)</div>
+            <div class="cf-item">Concentration of 28 pg/mg consistent with a single acute exposure event</div>
+            <div class="cf-item">No clonazolam detectable in adjacent hair segments — single exposure confirmed</div>
+            <div class="cf-item">Pharmacodynamic profile consistent with clinical presentation: amnesia, sedation, disinhibition</div>
+            <div class="cf-item">Designer drug status confirmed — not detectable by standard immunoassay panels</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SKILLS ════════════ -->
+<div class="section-divider"></div>
+<section id="skills">
+  <div class="container">
+    <div class="sr">
+      <div class="eyebrow">Capabilities</div>
+      <h2 class="section-title">Skills &amp; <em>Instrumentation</em></h2>
+      <div class="gold-rule"></div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="sr sr-d1">
+        <div class="sg-title">Laboratory Techniques</div>
+        <div class="skill-list">
+          <div class="skill-item"><div class="skill-name">GC-MS / GC-MS/MS</div><div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">LC-MS/MS (Triple Quad)</div><div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">LC-QTOF (High Resolution)</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">Immunoassay Interpretation</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">Hair Strand Analysis</div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="sr sr-d2">
+        <div class="sg-title">Forensic Science</div>
+        <div class="skill-list">
+          <div class="skill-item"><div class="skill-name">Postmortem Toxicology</div><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">Pharmacokinetic Modelling</div><div class="skill-bar"><div class="skill-fill" style="width:83%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">Litigation Pack Auditing</div><div class="skill-bar"><div class="skill-fill" style="width:91%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">Expert Witness Reporting</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">DFSA Investigation Support</div><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+        </div>
+      </div>
+
+      <div class="sr sr-d3">
+        <div class="sg-title">Analysis &amp; Communication</div>
+        <div class="skill-list">
+          <div class="skill-item"><div class="skill-name">Scientific Report Writing</div><div class="skill-bar"><div class="skill-fill" style="width:94%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">Statistical Data Analysis</div><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">Legal Briefing &amp; Testimony</div><div class="skill-bar"><div class="skill-fill" style="width:79%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">Python / R (Data)</div><div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div></div>
+          <div class="skill-item"><div class="skill-name">LIMS &amp; ChemStation</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools Grid -->
+    <div class="sr" style="margin-top:60px;">
+      <div class="eyebrow" style="margin-bottom:24px;">Software &amp; Tools</div>
+      <div class="tools-grid">
+        <div class="tool-chip">Agilent MassHunter</div>
+        <div class="tool-chip">Sciex Analyst</div>
+        <div class="tool-chip">Waters MassLynx</div>
+        <div class="tool-chip">NIST MS Library</div>
+        <div class="tool-chip">ChemStation</div>
+        <div class="tool-chip">LIMS</div>
+        <div class="tool-chip">R Studio</div>
+        <div class="tool-chip">Python</div>
+        <div class="tool-chip">Toxicology Tools</div>
+        <div class="tool-chip">Metlin Database</div>
+        <div class="tool-chip">mzCloud</div>
+        <div class="tool-chip">Microsoft Office</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ EDUCATION ════════════ -->
+<div class="section-divider"></div>
+<section id="education">
+  <div class="container">
+    <div class="sr">
+      <div class="eyebrow">Credentials</div>
+      <h2 class="section-title">Education &amp; <em>Certifications</em></h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="edu-grid" style="margin-top:50px;">
+      <div class="edu-card sr">
+        <div class="edu-badge">Primary Degree</div>
+        <div class="edu-degree">BSc (Hons) Forensic Science</div>
+        <div class="edu-inst">First Class Honours · University of [Institution] · 2022</div>
+        <p class="edu-detail">Dissertation: <em>"Postmortem Redistribution of Synthetic Cannabinoids in Central and Peripheral Blood Matrices."</em> Specialisations in analytical chemistry, pharmacotoxicology, and forensic biology. Departmental Academic Excellence Prize.</p>
+      </div>
+      <div class="edu-card sr sr-d2">
+        <div class="edu-badge">Continuing Professional Development</div>
+        <div class="edu-degree">MSc Forensic Toxicology</div>
+        <div class="edu-inst">In Progress · [Institution] · Expected 2025</div>
+        <p class="edu-detail">Focused modules in advanced mass spectrometry, clinical toxicology, pharmacokinetics, and medicolegal death investigation. Research thesis on novel psychoactive substance detection windows in hair.</p>
+      </div>
+    </div>
+
+    <div class="sr" style="margin-top:48px;">
+      <div class="eyebrow" style="margin-bottom:24px;">Professional Certifications &amp; Memberships</div>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div class="cert-icon">🏛️</div>
+          <div><div class="cert-name">Chartered Society of Forensic Sciences — Associate Member</div><div class="cert-body">CSFS — Demonstrating commitment to professional standards in forensic science practice</div></div>
+          <div class="cert-year">2023</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">🧪</div>
+          <div><div class="cert-name">Society of Forensic Toxicologists — Student/Affiliate Member</div><div class="cert-body">SOFT — International membership body for forensic toxicology professionals</div></div>
+          <div class="cert-year">2022</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">🔬</div>
+          <div><div class="cert-name">Certificate in Expert Witness Practice</div><div class="cert-body">CPD-accredited course in forensic report writing, court procedure, and testimony skills</div></div>
+          <div class="cert-year">2024</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">📋</div>
+          <div><div class="cert-name">Good Laboratory Practice (GLP) Certification</div><div class="cert-body">Regulatory compliance training for analytical laboratory environments</div></div>
+          <div class="cert-year">2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ ARTICLES ════════════ -->
+<div class="section-divider"></div>
+<section id="articles">
+  <div class="container">
+    <div class="sr">
+      <div class="eyebrow">Thought Leadership</div>
+      <h2 class="section-title">Scientific <em>Insights</em></h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="articles-grid">
+      <div class="article-card sr">
+        <div class="art-tag">Forensic Science</div>
+        <div class="art-title">The Role of Toxicology in Modern Criminal Investigations</div>
+        <p class="art-excerpt">How mass spectrometry has fundamentally shifted the evidentiary landscape — from corroborative data to primary evidence capable of standing alone in complex prosecutions.</p>
+        <a href="#" class="art-read">Read Article →</a>
+      </div>
+      <div class="article-card sr sr-d2">
+        <div class="art-tag">Analytical Chemistry</div>
+        <div class="art-title">Understanding Poison Detection: Beyond the Standard Screen</div>
+        <p class="art-excerpt">Why routine 10-panel screens miss the majority of toxic exposures — and the targeted methodologies that close the analytical gap in complex forensic cases.</p>
+        <a href="#" class="art-read">Read Article →</a>
+      </div>
+      <div class="article-card sr sr-d4">
+        <div class="art-tag">Medicolegal Science</div>
+        <div class="art-title">Postmortem Redistribution: The Most Misunderstood Phenomenon in Forensic Toxicology</div>
+        <p class="art-excerpt">Drug concentrations in postmortem specimens are not static. Understanding redistribution is critical to avoiding catastrophic misinterpretation of cause-of-death data.</p>
+        <a href="#" class="art-read">Read Article →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ BRAND GUIDE ════════════ -->
+<div class="section-divider"></div>
+<section id="brand-guide">
+  <div class="container">
+    <div class="sr" style="margin-bottom:52px;">
+      <div class="eyebrow">Brand Identity Reference</div>
+      <h2 class="section-title">Design System &amp; <em>Brand Guide</em></h2>
+      <div class="gold-rule"></div>
+      <p class="lead">Personal brand recommendations for deployment across digital and print contexts.</p>
+    </div>
+
+    <div class="brand-grid">
+      <!-- Names -->
+      <div class="bg-section sr">
+        <div class="bg-title">Brand Name Styles</div>
+        <div class="bg-item">
+          <div class="bg-label">Option 01 — Institutional Authority</div>
+          <div class="bg-value" style="font-family:var(--font-serif);font-size:18px;color:var(--gold);">Sharma Toxicology</div>
+          <div style="font-size:12px;color:var(--silver);margin-top:4px;">Clean, credential-forward. Sounds like an established practice.</div>
+        </div>
+        <div class="bg-item" style="margin-top:20px;">
+          <div class="bg-label">Option 02 — Specialist Precision</div>
+          <div class="bg-value" style="font-family:var(--font-serif);font-size:18px;color:var(--gold);">Axiom Toxicology Partners</div>
+          <div style="font-size:12px;color:var(--silver);margin-top:4px;">Implies institutional weight and undeniable scientific truth.</div>
+        </div>
+        <div class="bg-item" style="margin-top:20px;">
+          <div class="bg-label">Option 03 — Analytical Edge</div>
+          <div class="bg-value" style="font-family:var(--font-serif);font-size:18px;color:var(--gold);">Apex Forensic Analytics</div>
+          <div style="font-size:12px;color:var(--silver);margin-top:4px;">Forward-looking, tech-adjacent, modern forensic consulting feel.</div>
+        </div>
+
+        <div style="margin-top:32px;">
+          <div class="bg-title">Premium Taglines</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:12.5px;color:var(--pearl);font-style:italic;font-family:var(--font-serif);">"Precision Toxicology. Courtroom-Ready Evidence."</div>
+            <div style="font-size:12.5px;color:var(--pearl);font-style:italic;font-family:var(--font-serif);">"Where Molecules Meet Justice."</div>
+            <div style="font-size:12.5px;color:var(--pearl);font-style:italic;font-family:var(--font-serif);">"Decoding Toxic Evidence with Scientific Certainty."</div>
+            <div style="font-size:12.5px;color:var(--pearl);font-style:italic;font-family:var(--font-serif);">"Translating Complex Chemistry into Absolute Clarity."</div>
+            <div style="font-size:12.5px;color:var(--pearl);font-style:italic;font-family:var(--font-serif);">"Rigorous Analysis. Unimpeachable Conclusions."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colors -->
+      <div class="bg-section sr sr-d2">
+        <div class="bg-title">Color Palette</div>
+        <div class="color-row">
+          <div class="color-chip"><div class="chip-color" style="background:#08090D;border:1px solid rgba(255,255,255,0.1)"></div><div class="chip-label">#08090D<br>Obsidian</div></div>
+          <div class="color-chip"><div class="chip-color" style="background:#1A1E2E"></div><div class="chip-label">#1A1E2E<br>Deep Navy</div></div>
+          <div class="color-chip"><div class="chip-color" style="background:#C9A84C"></div><div class="chip-label">#C9A84C<br>Gold</div></div>
+          <div class="color-chip"><div class="chip-color" style="background:#2ABFBF"></div><div class="chip-label">#2ABFBF<br>Teal</div></div>
+        </div>
+        <div class="color-row">
+          <div class="color-chip"><div class="chip-color" style="background:#F0EEE9"></div><div class="chip-label">#F0EEE9<br>Pearl</div></div>
+          <div class="color-chip"><div class="chip-color" style="background:#9BA3B2"></div><div class="chip-label">#9BA3B2<br>Silver</div></div>
+          <div class="color-chip"><div class="chip-color" style="background:#141620"></div><div class="chip-label">#141620<br>Dark</div></div>
+          <div class="color-chip"><div class="chip-color" style="background:#E2C06A"></div><div class="chip-label">#E2C06A<br>Gold Light</div></div>
+        </div>
+
+        <div style="margin-top:28px;">
+          <div class="bg-title">Typography Pairing</div>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div>
+              <div class="bg-label">Display / Headings</div>
+              <div style="font-family:var(--font-serif);font-size:22px;color:var(--pearl);">Playfair Display</div>
+              <div style="font-size:12px;color:var(--silver);">Authoritative serif — legal, academic, premium feel</div>
+            </div>
+            <div>
+              <div class="bg-label">Body / UI</div>
+              <div style="font-family:var(--font-sans);font-size:16px;color:var(--pearl);">DM Sans</div>
+              <div style="font-size:12px;color:var(--silver);">Clean, geometric — clinical and legible at all sizes</div>
+            </div>
+            <div>
+              <div class="bg-label">Labels / Data</div>
+              <div style="font-family:var(--font-mono);font-size:14px;color:var(--gold);">DM Mono</div>
+              <div style="font-size:12px;color:var(--silver);">Technical, precise — ideal for metadata and tags</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Microcopy + Transitions -->
+      <div class="bg-section sr sr-d4">
+        <div class="bg-title">Microcopy Guide</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div><div class="bg-label">Primary CTA</div><div class="bg-value">"Request Confidential Consultation"</div></div>
+          <div><div class="bg-label">Secondary CTA</div><div class="bg-value">"View Case Work"</div></div>
+          <div><div class="bg-label">Nav CTA</div><div class="bg-value">"Initiate Inquiry"</div></div>
+          <div><div class="bg-label">Form Submit</div><div class="bg-value">"Secure Inquiry Transmission"</div></div>
+          <div><div class="bg-label">Articles</div><div class="bg-value">"Read Full Analysis →"</div></div>
+          <div><div class="bg-label">Case Studies</div><div class="bg-value">"Examine Case"</div></div>
+          <div><div class="bg-label">About Section</div><div class="bg-value">"Scientific Background"</div></div>
+        </div>
+
+        <div style="margin-top:30px;">
+          <div class="bg-title">Transition Design</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="font-size:13px;color:var(--silver);">• <strong style="color:var(--pearl)">Page load:</strong> Staggered fade-up with 80–100ms delays per element</div>
+            <div style="font-size:13px;color:var(--silver);">• <strong style="color:var(--pearl)">Scroll reveal:</strong> translateY(24px) → 0, 0.8s ease with IntersectionObserver</div>
+            <div style="font-size:13px;color:var(--silver);">• <strong style="color:var(--pearl)">Card hover:</strong> Gold top-border sweep + subtle Y lift (-3px)</div>
+            <div style="font-size:13px;color:var(--silver);">• <strong style="color:var(--pearl)">Buttons:</strong> Metallic fill sweep left→right on hover</div>
+            <div style="font-size:13px;color:var(--silver);">• <strong style="color:var(--pearl)">Skill bars:</strong> scaleX(0→1) triggered on scroll entry</div>
+            <div style="font-size:13px;color:var(--silver);">• <strong style="color:var(--pearl)">Section background:</strong> Linear gradient transitions between obsidian and deep navy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ CONTACT ════════════ -->
+<div class="section-divider"></div>
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="sr">
+        <div class="eyebrow">Engage</div>
+        <h2 class="section-title">Request Confidential<br><em>Consultation</em></h2>
+        <div class="gold-rule"></div>
+        <p class="contact-desc">I accept a limited number of new cases per quarter to maintain the highest standards of analytical work. Please provide preliminary non-confidential details to initiate a review.</p>
+        <div class="contact-meta">
+          <div class="cm-item"><div class="cm-dot"></div><span>All enquiries reviewed within 48 hours</span></div>
+          <div class="cm-item"><div class="cm-dot"></div><span>Strict confidentiality protocols observed</span></div>
+          <div class="cm-item"><div class="cm-dot"></div><span>Emergency reviews available for time-sensitive matters</span></div>
+          <div class="cm-item"><div class="cm-dot"></div><span>Expert witness engagements and litigation support welcomed</span></div>
+        </div>
+      </div>
+
+      <div class="sr sr-d2">
+        <form class="contact-form" onsubmit="return false;">
+          <div class="field-group">
+            <label class="field-label">Your Name</label>
+            <input type="text" class="field-input" placeholder="Full name and professional title">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Organisation</label>
+            <input type="text" class="field-input" placeholder="Law firm, agency, or organisation name">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Case Type</label>
+            <select class="field-select">
+              <option value="" disabled selected>Select case type…</option>
+              <option>Criminal Defence</option>
+              <option>Civil Litigation</option>
+              <option>Wrongful Death</option>
+              <option>DFSA / Sexual Assault</option>
+              <option>Corporate / Workplace</option>
+              <option>Regulatory / Compliance</option>
+              <option>Academic / Research</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Case Overview</label>
+            <textarea class="field-textarea" placeholder="Brief, non-confidential summary of the matter. Do not include sensitive personal information at this stage."></textarea>
+          </div>
+          <p class="field-note">Submission does not constitute a retainer agreement. All details held in strict confidence. ⚖️</p>
+          <button type="submit" class="btn btn-primary" style="margin-top:8px;"><span>Secure Inquiry Transmission</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <a href="#hero" class="foot-brand">A<span>.</span>Sharma</a>
+  <div class="foot-copy">© 2026 Dr. Anika Sharma — Forensic Toxicology Consulting. All rights reserved.</div>
+  <div class="foot-links">
+    <a href="#about">About</a>
+    <a href="#cases">Cases</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<!-- ════════════ JS ════════════ -->
+<script>
+// Nav scroll behaviour
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Scroll reveal
+const revealItems = document.querySelectorAll('.sr');
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      // Skill bars
+      e.target.querySelectorAll && e.target.querySelectorAll('.skill-item').forEach(s => s.classList.add('in'));
+    }
+  });
+}, { threshold: 0.1 });
+revealItems.forEach(el => revObs.observe(el));
+
+// Skill bars (on parent section visible)
+const skillSection = document.getElementById('skills');
+const skillObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.skill-item').forEach((item, i) => {
+      setTimeout(() => item.classList.add('in'), i * 80);
+    });
+  }
+}, { threshold: 0.2 });
+skillObs.observe(skillSection);
+
+// Case tabs
+function showCase(idx) {
+  document.querySelectorAll('.case-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.case-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+}
+</script>
+</body>
+</html>
