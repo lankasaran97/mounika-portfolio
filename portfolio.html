@@ -142,12 +142,20 @@
     .project-img {
       width: 100%;
       height: 180px;
-      background-color: #1e1e1f;
+      background-color: #252526; /* Slightly lighter box to contrast with the card */
       display: flex;
       align-items: center;
       justify-content: center;
       border-bottom: 1px solid var(--border-color);
       position: relative;
+    }
+
+    /* Updated to make the icons bright and visible! */
+    .project-img svg {
+      width: 70px;
+      height: 70px;
+      fill: var(--accent); /* Swaps the dark grey for the bright gold accent */
+      opacity: 0.9; /* Removes the heavy transparency */
     }
 
     /* Using an abstract icon as a placeholder for project imagery */
