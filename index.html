@@ -103,10 +103,16 @@
       gap: 20px;
     }
 
-    .contact-item {
+   .contact-item {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px; /* Reduced from 15px to give the text more room */
+    }
+
+    .contact-text .value {
+      font-size: 12px; /* Reduced to 12px */
+      color: var(--text-muted);
+      white-space: nowrap; /* Forces the text to stay on one line */
     }
 
     .icon-box {
